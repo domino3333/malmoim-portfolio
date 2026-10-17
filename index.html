@@ -70,8 +70,8 @@ p code { font-size: .88em; }
   min-width: 0;
 }
 .slide-title { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 27px; }
-.slide-title h2 { display: flex; align-items: baseline; gap: 15px; font-size: 27px; letter-spacing: -.8px; color: var(--deep); }
-.slide-title h2 > span {
+.slide-title :is(h2, h3) { display: flex; align-items: baseline; gap: 15px; font-size: 27px; letter-spacing: -.8px; color: var(--deep); }
+.slide-title :is(h2, h3) > span {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -325,7 +325,7 @@ p code { font-size: .88em; }
   .slide { padding: 27px 28px 30px; }
   .split { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 26px; }
   .answer-split { grid-template-columns: 1fr 1fr; }
-  .slide-title h2 { font-size: 24px; }
+  .slide-title :is(h2, h3) { font-size: 24px; }
   .system-diagram { gap: 8px; }
   .system-node { padding: 20px 10px; }
   .system-node strong { font-size: 20px; }
@@ -356,8 +356,8 @@ p code { font-size: .88em; }
   .slide-title { margin-bottom: 22px; }
   .section-roles { width: 100%; padding-left: 41px; gap: 6px; }
   .role-badge { font-size: 11px; }
-  .slide-title h2 { gap: 10px; font-size: 21px; letter-spacing: -.6px; }
-  .slide-title h2 > span { min-width: 31px; height: 27px; font-size: 12px; }
+  .slide-title :is(h2, h3) { gap: 10px; font-size: 21px; letter-spacing: -.6px; }
+  .slide-title :is(h2, h3) > span { min-width: 31px; height: 27px; font-size: 12px; }
   .slide-content { gap: 23px; }
   .split, .management, .answer-split { grid-template-columns: 1fr; gap: 24px; }
   .intro-split h1 { font-size: 32px; }
@@ -436,8 +436,8 @@ p code { font-size: .88em; }
   body { background: white; }
   .deck { width: 100%; margin: 0; }
   .slide { border: 0; border-radius: 0; box-shadow: none; padding: 0; margin-bottom: 12mm; break-after: page; }
-  .slide:last-child { break-after: auto; }
-  .slide-title h2 { font-size: 22pt; }
+  .deck > .slide:last-child { break-after: auto; }
+  .slide-title :is(h2, h3) { font-size: 22pt; }
   .split { grid-template-columns: 1.65fr 1fr; gap: 8mm; }
   .three-points { grid-template-columns: repeat(3, 1fr); }
   .two-points, .implementation-grid, .issue-columns { grid-template-columns: 1fr 1fr; }
@@ -602,6 +602,184 @@ p code { font-size: .88em; }
   .erd-canvas .erd-desktop { display: block; width: 100%; max-width: 100%; }
   .erd-scroll-hint { display: none; }
 }
+
+/* 2026-10-15: recommendation deadlock evidence; scoped to added case slides */
+#vote-deadlock .slide-content, #vote-lock-cost .slide-content { gap: 18px; }
+#vote-deadlock .issue-columns, #vote-lock-cost .issue-columns { gap: 26px; }
+#vote-deadlock p, #vote-lock-cost p { overflow-wrap: anywhere; }
+#vote-deadlock .issue-heading strong, #vote-lock-cost .issue-heading strong { font-size: 21px; }
+#vote-deadlock .point p, #vote-lock-cost .point p { font-size: 13px; line-height: 1.8; }
+#vote-deadlock ul, #vote-lock-cost ul { margin: 8px 0 0; padding-left: 20px; font-size: 13px; line-height: 1.8; }
+#vote-deadlock li + li, #vote-lock-cost li + li { margin-top: 4px; }
+#vote-deadlock .compact-note, #vote-lock-cost .compact-note { font-size: 12px; line-height: 1.75; }
+#vote-deadlock a, #vote-lock-cost a { color: var(--brown); text-underline-offset: 3px; }
+#vote-deadlock .code-note pre, #vote-lock-cost .code-note pre { margin-top: 6px; padding: 11px 14px; }
+#vote-deadlock .code-note pre code, #vote-lock-cost .code-note pre code { font-size: 12px; line-height: 1.7; }
+#vote-lock-cost .rank-table code { font-size: 11px; line-height: 1.6; }
+@media (max-width: 760px) {
+  #vote-deadlock .issue-heading strong, #vote-lock-cost .issue-heading strong { font-size: 18px; }
+  #vote-deadlock .issue-columns, #vote-lock-cost .issue-columns { gap: 18px; }
+}
+@media print {
+  #vote-deadlock .slide-content, #vote-lock-cost .slide-content { gap: 10px; }
+  #vote-deadlock .slide-title, #vote-lock-cost .slide-title { margin-bottom: 12px; }
+  #vote-deadlock .slide-title :is(h2, h3), #vote-lock-cost .slide-title :is(h2, h3) { font-size: 19pt; }
+  #vote-deadlock .issue-heading, #vote-lock-cost .issue-heading { padding: 10px 14px; }
+  #vote-deadlock .point p, #vote-lock-cost .point p, #vote-deadlock ul, #vote-lock-cost ul { font-size: 10pt; line-height: 1.6; }
+}
+
+
+/* Problem-solving chapter: boxed introduction and independent case numbering. */
+.problem-solving { margin-top: 44px; scroll-margin-top: 24px; min-width: 0; }
+.problem-solving-heading {
+  padding: 23px 32px;
+  margin-bottom: 22px;
+  border: 1px solid #d8bfa9;
+  border-radius: 14px;
+  background: #efe3d7;
+  break-inside: avoid;
+  break-after: avoid;
+}
+.problem-solving-heading h2 { margin: 0; color: #34261d; font-size: 28px; line-height: 1.4; letter-spacing: -.8px; }
+.problem-solving > .slide { border-top: 1px solid #e3d7cc; }
+.problem-solving .problem-case-heading { align-items: flex-start; flex-direction: column; gap: 13px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.problem-case-label { margin: 0; display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 6px; background: #80583b; color: #fffdfb; font-size: 12px; line-height: 1.6; font-weight: 700; letter-spacing: .1px; }
+.problem-solving .problem-case-heading h3 { display: block; margin: 0; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
+.problem-solving h4 { margin: 0 0 12px; color: #252525; font-size: 16px; }
+.problem-solving .code-note h4 { font-size: 15px; }
+.problem-solving .implementation-grid { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.problem-solving .implementation-grid .code-note { min-width: 0; }
+.problem-solving .issue-heading .case-kicker { margin: 0 0 5px; color: var(--brown); font-size: 12px; font-weight: 700; }
+#voting .compact-note a { color: var(--brown); text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .problem-solving { margin-top: 30px; scroll-margin-top: 12px; }
+  .problem-solving-heading { padding: 19px 20px; border-radius: 12px; margin-bottom: 16px; }
+  .problem-solving-heading h2 { font-size: 23px; }
+  .problem-solving .problem-case-heading { gap: 11px; padding-bottom: 18px; }
+  .problem-case-label { font-size: 11px; padding: 5px 10px; }
+}
+@media print {
+  .problem-solving { margin-top: 0; }
+  .problem-solving-heading { padding: 5mm 6mm; margin-bottom: 5mm; border-radius: 3mm; print-color-adjust: exact; }
+  .problem-solving-heading h2 { font-size: 22pt; }
+  .problem-solving > .slide { border-top: 0; }
+  .problem-solving .problem-case-heading { gap: 7px; padding-bottom: 10px; }
+  .problem-case-label { print-color-adjust: exact; }
+  .problem-solving .slide-title, .problem-solving .issue-heading { break-inside: avoid; break-after: avoid; }
+  .problem-solving .implementation-grid, .problem-solving .issue-columns { break-inside: avoid; }
+  .problem-solving .implementation-grid { padding-bottom: 10px; }
+  .problem-solving .implementation-grid p { font-size: 10pt; line-height: 1.6; }
+}
+
+
+/* Readable lock comparison and ordered recommendation processing. */
+#vote-deadlock .lock-party { padding: 16px 18px; border: 1px solid #e5d8cc; border-radius: 10px; background: #fcf8f3; }
+#vote-deadlock .lock-party + .lock-party { margin-top: 12px; }
+#vote-deadlock .lock-party-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 10px; }
+#vote-deadlock .lock-party-heading strong { color: #493223; font-size: 15px; }
+#vote-deadlock .lock-party-heading span { color: #756253; font-size: 12px; }
+#vote-deadlock .lock-state { display: grid; gap: 9px; margin: 0; font-size: 13px; line-height: 1.75; }
+#vote-deadlock .lock-state > div { display: grid; grid-template-columns: 37px minmax(0, 1fr); gap: 8px; align-items: baseline; }
+#vote-deadlock .lock-state dt { color: #715238; font-weight: 700; }
+#vote-deadlock .lock-state dd { margin: 0; min-width: 0; }
+#vote-deadlock .lock-wait-reason { padding-top: 10px; margin: 11px 0 0; border-top: 1px solid #e8ddd3; color: #625247; }
+#vote-deadlock .lock-cycle-summary { margin-top: 16px; }
+#vote-deadlock .vote-processing { padding-top: 22px; border-top: 1px solid var(--line); }
+#vote-deadlock .vote-processing-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
+#vote-deadlock .vote-processing-steps li { min-width: 0; margin: 0; padding: 16px 14px; border: 1px solid #e3d6ca; border-radius: 9px; background: #fcf8f3; }
+#vote-deadlock .processing-number { display: inline-flex; align-items: center; justify-content: center; width: 25px; height: 25px; margin-bottom: 10px; border-radius: 50%; color: white; background: #80583b; font-size: 12px; font-weight: 700; }
+#vote-deadlock .vote-processing-steps strong { display: block; color: #34261d; font-size: 13px; line-height: 1.6; word-break: keep-all; }
+#vote-deadlock .vote-processing-steps p { margin: 7px 0 0; color: #625247; font-size: 12px; line-height: 1.8; word-break: keep-all; }
+@media (min-width: 761px) and (max-width: 1100px) {
+  #vote-deadlock .vote-processing-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  #vote-deadlock .lock-party { padding: 14px; }
+  #vote-deadlock .vote-processing-steps { grid-template-columns: minmax(0, 1fr); gap: 9px; }
+  #vote-deadlock .vote-processing-steps li { display: flex; align-items: flex-start; gap: 12px; padding: 14px; }
+  #vote-deadlock .processing-number { flex-shrink: 0; margin: 1px 0 0; }
+  #vote-deadlock .vote-processing-steps p { margin-top: 4px; }
+}
+@media print {
+  #vote-deadlock .lock-party { padding: 10px 12px; break-inside: avoid; }
+  #vote-deadlock .lock-state { font-size: 10pt; }
+  #vote-deadlock .vote-processing { padding-top: 12px; break-inside: avoid; }
+  #vote-deadlock .vote-processing-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  #vote-deadlock .vote-processing-steps li { padding: 10px; print-color-adjust: exact; }
+  #vote-deadlock .processing-number { print-color-adjust: exact; }
+}
+
+
+/* Narrative order: discovery, cause, solution, then the following verification card. */
+#vote-deadlock .deadlock-parties { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+#vote-deadlock .deadlock-parties .lock-party + .lock-party { margin-top: 0; }
+#vote-deadlock .story-analysis, #vote-deadlock .story-solution { min-width: 0; }
+#vote-deadlock .story-solution { padding-top: 22px; border-top: 1px solid var(--line); }
+#vote-deadlock .story-intro { margin: 0 0 18px; font-size: 14px; line-height: 1.85; color: #625247; }
+#vote-deadlock .solution-details { align-items: start; }
+#vote-deadlock .solution-details > .code-note { padding-top: 0; border-top: 0; }
+#vote-deadlock .solution-details .implementation-grid { padding: 0; border: 0; gap: 20px; }
+#vote-deadlock .solution-details h5 { margin: 0 0 12px; color: #34261d; font-size: 15px; line-height: 1.65; }
+#vote-deadlock .solution-details .code-note > p { font-size: 13px; line-height: 1.8; }
+#vote-deadlock .solution-details .code-note > .code-source { font-size: 11px; }
+#vote-deadlock .story-bridge { margin: 0; padding: 12px 16px; border-left: 3px solid #b48d6a; background: #fcf8f3; color: #625247; }
+@media (max-width: 760px) {
+  #vote-deadlock .deadlock-parties { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  #vote-deadlock .story-intro { font-size: 13px; }
+}
+@media print {
+  #vote-deadlock .story-analysis > h4, #vote-deadlock .story-solution > h4 { break-after: avoid; }
+  #vote-deadlock .deadlock-parties { break-inside: avoid; }
+  #vote-deadlock .story-solution { padding-top: 12px; }
+}
+
+
+/* Verification and costs continue inside the same problem-solving card. */
+#vote-lock-cost.case-followup { min-width: 0; padding-top: 26px; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
+#vote-lock-cost .followup-heading h4 { margin: 0 0 20px; color: var(--deep); font-size: 23px; line-height: 1.5; letter-spacing: -.6px; word-break: keep-all; overflow-wrap: anywhere; }
+#vote-lock-cost h5 { margin: 0 0 12px; color: #252525; font-size: 16px; line-height: 1.65; }
+@media (max-width: 760px) {
+  #vote-lock-cost.case-followup { padding-top: 22px; scroll-margin-top: 12px; }
+  #vote-lock-cost .followup-heading h4 { font-size: 20px; margin-bottom: 18px; }
+}
+@media print {
+  #vote-lock-cost.case-followup { break-before: page; padding-top: 0; border-top: 0; }
+  #vote-lock-cost .followup-heading { break-after: avoid; }
+  #vote-lock-cost .followup-heading h4 { font-size: 19pt; }
+}
+
+
+/* Read results first, followed by the cost of the chosen solution. */
+#vote-lock-cost .result-cost-stack { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+#vote-lock-cost .result-cost-stack > div { min-width: 0; }
+#vote-lock-cost .result-cost-stack > .point { padding-top: 0; border-top: 0; }
+#vote-lock-cost h5 { font-size: 20px; line-height: 1.6; margin-bottom: 16px; }
+#vote-lock-cost .point p { font-size: 16px; line-height: 1.95; margin: 0 0 12px; }
+#vote-lock-cost .rank-table { font-size: 16px; table-layout: fixed; }
+#vote-lock-cost .rank-table th, #vote-lock-cost .rank-table td { padding: 12px 16px; overflow-wrap: anywhere; }
+#vote-lock-cost .rank-table caption { font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+#vote-lock-cost .rank-table code { font-size: 13px; overflow-wrap: anywhere; white-space: normal; }
+#vote-lock-cost .compact-note { font-size: 14px; line-height: 1.9; }
+#vote-lock-cost .compact-note code { font-size: 13px; }
+@media (max-width: 760px) {
+  #vote-lock-cost .result-cost-stack { gap: 26px; }
+  #vote-lock-cost h5 { font-size: 19px; }
+  #vote-lock-cost .point p, #vote-lock-cost .rank-table { font-size: 15px; }
+  #vote-lock-cost .rank-table th, #vote-lock-cost .rank-table td { padding: 11px 10px; }
+}
+@media print {
+  #vote-lock-cost .result-cost-stack { grid-template-columns: minmax(0, 1fr); gap: 20px; break-inside: auto; }
+  #vote-lock-cost .result-cost-stack > div { break-inside: avoid; }
+  #vote-lock-cost h5 { font-size: 14pt; break-after: avoid; }
+  #vote-lock-cost .point p, #vote-lock-cost .rank-table { font-size: 11pt; }
+}
+
+/* Keep the verification setup next to its observed results. */
+#vote-lock-cost .verification-method { margin: 0 0 18px; padding: 14px 16px; border-left: 3px solid #b48d6a; background: #fcf8f3; }
+@media (max-width: 760px) {
+  #vote-lock-cost .verification-method { padding: 12px 14px; }
+}
+
 </style></head><body>
 <main class="deck"><section class="profile-about" id="profile" aria-labelledby="profile-title">
   <div class="personal-header">
@@ -806,9 +984,9 @@ qnaRoomMapper.<span class="tok-function">updateQnaPhase</span>(roomNo, <span cla
 <span class="tok-function">setQuestions</span>(prev <span class="tok-operator">=&gt;</span> <span class="tok-function">mergeQuestionLists</span>(questionListSnapshot, prev));</code></pre><p>호스트의 HTTP 조회 결과와 먼저 수신한 질문을 함께 반영. Map의 키는 questionNo.</p></div>
 <p class="compact-note">연결 성공 콜백에서 구독 등록과 질문 조회 수행. 재연결 후에도 같은 흐름 실행.</p>
 </div></div></div>
-    </section><!-- 10. 추천 투표와 중복 요청 처리 -->
+    </section><!-- 10. 추천 투표 -->
     <section class="slide " id="voting" aria-labelledby="voting-title" data-roles="participant">
-      <div class="slide-title"><h2 id="voting-title"><span>10</span> 추천 투표와 중복 요청 처리</h2><div class="section-roles"><span class="role-badge role-participant">참여자 기능</span></div></div>
+      <div class="slide-title"><h2 id="voting-title"><span>10</span> 추천 투표</h2><div class="section-roles"><span class="role-badge role-participant">참여자 기능</span></div></div>
       <div class="slide-content">
 <div class="split"><div><figure class="screen-figure" data-role="participant" data-title="참여자 투표 화면">
       <div class="screen-stage" style="aspect-ratio:1356/602;--native-width:1356px">
@@ -816,15 +994,22 @@ qnaRoomMapper.<span class="tok-function">updateQnaPhase</span>(roomNo, <span cla
       </div><figcaption><span class="figure-caption"><span class="role-badge role-participant">참여자 화면</span><span>참여자 투표 화면</span></span><button class="expand-screen" type="button" aria-haspopup="dialog" aria-label="참여자 투표 화면 화면 확대">확대 ↗</button></figcaption>
     </figure>
 <p class="figure-note">투표는 HTTP로 저장. 추천 순위는 결과 공개 시 전달.</p></div>
-<div class="explain"><h3 class="diagram-title">서버 처리 순서</h3>
-<div class="flow vertical small"><div class="flow-node" data-role="common"><span class="flow-step">01</span><div><span class="role-badge role-common">공통</span><strong>투표 가능 여부 검사</strong><small>진행 단계·종료 시각 확인</small></div></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-node" data-role="common"><span class="flow-step">02</span><div><span class="role-badge role-common">공통</span><strong>vote 저장</strong><small>같은 참여자·질문 조합 중복 검사</small></div></div><span class="flow-arrow" aria-hidden="true">↓</span><div class="flow-node" data-role="common"><span class="flow-step">03</span><div><span class="role-badge role-common">공통</span><strong>추천 수 증가</strong><small>투표 저장과 같은 트랜잭션</small></div></div></div>
+<div class="explain"><h3 class="diagram-title">참여자의 추천 흐름</h3>
+<div class="flow vertical small">
+  <div class="flow-node" data-role="participant"><span class="flow-step">01</span><div><span class="role-badge role-participant">참여자</span><strong>질문 추천</strong><small>투표 단계에서 원하는 질문의 추천 버튼 선택</small></div></div>
+  <span class="flow-arrow" aria-hidden="true">↓</span>
+  <div class="flow-node" data-role="common"><span class="flow-step">02</span><div><span class="role-badge role-common">공통</span><strong>추천 반영</strong><small>참여자당 각 질문에 한 번씩 추천 가능</small></div></div>
+  <span class="flow-arrow" aria-hidden="true">↓</span>
+  <div class="flow-node" data-role="participant"><span class="flow-step">03</span><div><span class="role-badge role-participant">참여자</span><strong>공개된 결과 확인</strong><small>결과 공개 시 추천 순위 확인</small></div></div>
+</div>
 </div></div>
-<div class="implementation-grid">
-<div class="code-note" data-role="common"><span class="role-badge role-common">공통 처리</span><h3>질문별 중복 추천 방지</h3><p class="code-source">vote 테이블</p><pre data-language="sql"><code><span class="tok-keyword">CONSTRAINT</span> <span class="tok-property">vote_uk</span>
-<span class="tok-keyword">UNIQUE</span> (<span class="tok-property">participant_no</span>, <span class="tok-property">question_no</span>)</code></pre><p>참여자당 각 질문에 한 번만 추천 가능.</p></div>
-<div class="code-note" data-role="common"><span class="role-badge role-common">공통 처리</span><h3>추천 수는 DB에서 증가</h3><p class="code-source">QuestionMapper.xml</p><pre data-language="sql"><code><span class="tok-property">vote_count</span> <span class="tok-operator">=</span> <span class="tok-property">vote_count</span> <span class="tok-operator">+</span> <span class="tok-number">1</span></code></pre><p>Java에서 읽고 다시 저장하는 대신 SQL에서 증가. 투표 저장과 같은 트랜잭션으로 처리.</p></div>
-</div></div>
-    </section><!-- 11. 결과 공개와 추천 순위 -->
+<p class="compact-note">동시 중복 요청의 처리와 검증 과정은 <a href="#problem-solving">문제 해결</a>에 정리했습니다.</p>
+</div>
+    </section>
+
+
+
+<!-- 11. 결과 공개와 추천 순위 -->
     <section class="slide " id="ranking" aria-labelledby="ranking-title" data-roles="host participant">
       <div class="slide-title"><h2 id="ranking-title"><span>11</span> 결과 공개와 추천 순위</h2><div class="section-roles"><span class="role-badge role-host">호스트 기능</span><span class="role-badge role-participant">참여자 기능</span></div></div>
       <div class="slide-content">
@@ -857,7 +1042,102 @@ qnaRoomMapper.<span class="tok-function">updateQnaPhase</span>(roomNo, <span cla
 <p class="compact-note">서버에서도 <code>QnaPhase.ANSWERING</code> 단계인지 확인한 뒤 변경 허용.</p>
 <div class="answer-states"><span>대기</span><b>⇄</b><span>답변 완료</span></div>
 </div></div></div>
-    </section><!-- 13. AWS 배포 구조 -->
+    </section><!-- 문제 해결: 기능 소개와 별도 번호 체계 -->
+<section class="problem-solving" id="problem-solving" aria-labelledby="problem-solving-title">
+  <header class="problem-solving-heading">
+    <h2 id="problem-solving-title">문제 발견 및 해결 과정</h2>
+  </header>
+<article class="slide" id="vote-deadlock" aria-labelledby="vote-deadlock-title" data-roles="common">
+  <div class="slide-title problem-case-heading">
+    <h3 id="vote-deadlock-title">동시 중복 추천에서 발생한 교착 해결</h3>
+  </div>
+  <div class="slide-content">
+    <div class="issue-heading">
+      <p class="case-kicker">문제 발견</p>
+      <strong>최종 DB 값만 확인하던 테스트에서 교착 예외를 발견</strong>
+      <p>같은 참여자가 같은 질문을 동시에 추천하면 한 요청은 성공하고, 다른 요청은 중복 추천으로 거절되기를 기대했습니다. 실제로 추천 기록과 추천 수는 각각 1이었지만, 실패한 요청에서는 교착 예외가 발생했습니다.</p>
+      <p>기존 테스트에 실패한 요청의 예외 종류·상태 코드·중복 사유 검사를 추가하면서, 최종 데이터는 맞아도 요청이 예상한 방식으로 처리되지 않는다는 점을 확인했습니다.</p>
+    </div>
+    <div class="story-analysis">
+      <h4>원인 분석: 두 트랜잭션이 서로의 잠금 해제를 기다림</h4>
+      <div class="deadlock-parties">
+<div class="lock-party">
+          <p class="lock-party-heading"><strong>트랜잭션 A</strong><span>추천 저장 중</span></p>
+          <dl class="lock-state">
+            <div><dt>보유</dt><dd>질문 행의 공유 잠금 <b>S</b></dd></div>
+            <div><dt>대기</dt><dd>중복 검사 대상인 <code>vote_uk</code> 레코드의 공유 잠금 <b>S</b></dd></div>
+          </dl>
+          <p class="lock-wait-reason">B가 가진 X 잠금 때문에 추천 기록의 잠금을 기다립니다.</p>
+        </div>
+<div class="lock-party">
+          <p class="lock-party-heading"><strong>트랜잭션 B</strong><span>추천 수 증가 중</span></p>
+          <dl class="lock-state">
+            <div><dt>보유</dt><dd>같은 <code>vote_uk</code> 레코드의 배타 잠금 <b>X</b></dd></div>
+            <div><dt>대기</dt><dd>같은 질문 행의 배타 잠금 <b>X</b></dd></div>
+          </dl>
+          <p class="lock-wait-reason">A가 가진 S 잠금 때문에 질문 행을 변경하지 못하고 기다립니다.</p>
+        </div>
+      </div>
+      <p class="lock-cycle-summary">DB가 교착 상태를 해소하더라도 요청은 의도하지 않은 예외로 실패했습니다. <strong>질문 행의 잠금을 먼저 획득하도록 순서를 바꿔 관찰한 교착을 피하고, 중복 추천은 기존의 409 예외 처리로 이어지도록 했습니다.</strong></p>
+    </div>
+    <div class="story-solution">
+      <h4>해결 방법: 질문의 X 잠금을 먼저 획득하도록 조회 변경</h4>
+      <p class="story-intro">기존 질문 존재 조회를 <code>SELECT … FOR UPDATE</code>로 바꾸고, <code>@Transactional castVote</code> 안에서 추천 저장보다 먼저 질문 행의 X 잠금을 획득하도록 했습니다. 같은 질문의 경쟁 요청은 선행 트랜잭션이 끝날 때까지 이 조회에서 대기하도록, 잠금 획득 순서를 맞췄습니다.</p>
+      <div class="issue-columns solution-details">
+<div class="code-note">
+        <h5>존재 조회를 잠금 조회로 교체</h5>
+        <p class="code-source">QuestionMapper.selectQuestionNoForUpdate</p>
+        <pre><code><span class="tok-keyword">SELECT</span> no <span class="tok-keyword">FROM</span> question
+<span class="tok-keyword">WHERE</span> room_no = #{roomNo}
+  <span class="tok-keyword">AND</span> no = #{questionNo}
+<span class="tok-keyword">FOR UPDATE</span></code></pre>
+      </div>
+<div class="implementation-grid one-column">
+<div class="code-note" data-role="common"><span class="role-badge role-common">공통 처리</span><h5>기존 중복 방지 제약 유지</h5><p class="code-source">vote 테이블</p><pre data-language="sql"><code><span class="tok-keyword">CONSTRAINT</span> <span class="tok-property">vote_uk</span>
+<span class="tok-keyword">UNIQUE</span> (<span class="tok-property">participant_no</span>, <span class="tok-property">question_no</span>)</code></pre><p>참여자당 각 질문에 한 번만 추천 가능.</p></div>
+<div class="code-note" data-role="common"><span class="role-badge role-common">공통 처리</span><h5>추천 수의 원자적 증가 유지</h5><p class="code-source">QuestionMapper.xml</p><pre data-language="sql"><code><span class="tok-property">vote_count</span> <span class="tok-operator">=</span> <span class="tok-property">vote_count</span> <span class="tok-operator">+</span> <span class="tok-number">1</span></code></pre><p>Java에서 읽고 다시 저장하는 대신 SQL에서 증가. 투표 저장과 같은 트랜잭션으로 처리.</p></div>
+</div>
+      </div>
+    </div>
+<div class="vote-processing" aria-labelledby="vote-processing-title">
+      <h4 id="vote-processing-title">변경 후 처리 순서</h4>
+      <ol class="vote-processing-steps">
+        <li><span class="processing-number" aria-hidden="true">1</span><div><strong>질문 조회·잠금</strong><p>질문의 X 잠금을 획득합니다.<br>질문이 없으면 404로 거절합니다.</p></div></li>
+        <li><span class="processing-number" aria-hidden="true">2</span><div><strong>투표 가능 여부 확인</strong><p>방 정보, 투표 단계와<br>마감 시각을 확인합니다.</p></div></li>
+        <li><span class="processing-number" aria-hidden="true">3</span><div><strong>추천 기록 저장</strong><p>vote에 추천을 저장합니다.<br>중복이면 409로 거절합니다.</p></div></li>
+        <li><span class="processing-number" aria-hidden="true">4</span><div><strong>추천 수 증가</strong><p>SQL에서 추천 수를<br>원자적으로 1 증가시킵니다.</p></div></li>
+        <li><span class="processing-number" aria-hidden="true">5</span><div><strong>정상 종료·커밋</strong><p>서비스가 정상 종료되면<br>Spring이 커밋하고 잠금을 해제합니다.</p></div></li>
+      </ol>
+    </div>
+<section class="case-followup" id="vote-lock-cost" aria-labelledby="vote-lock-cost-title" data-roles="common">
+  <div class="slide-content">
+    <div class="issue-columns result-cost-stack">
+      <div>
+        <h5 id="vote-lock-cost-title">해결 후 확인한 결과</h5>
+        <table class="rank-table">
+          <caption>서비스 직접 호출 결과 · HTTP 응답 검증과 구분</caption>
+          <thead><tr><th scope="col">관찰 대상</th><th scope="col">결과</th></tr></thead>
+          <tbody>
+            <tr><td>task 1</td><td>성공</td></tr>
+            <tr><td>task 2</td><td><code>ResponseStatusException</code><br>409 · 중복 사유 검사 통과</td></tr>
+            <tr><td>최종 추천 기록 / 집계</td><td>1건 / 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="point">
+        <h5>잠금 획득을 앞당긴 데 따른 비용</h5>
+        <p>하지만, 위의 해결 방법으로 인한 비용도 있습니다. 기존 집계 UPDATE도 질문 행의 X 잠금을 획득합니다. 이번 선택은 그 시점을 첫 조회로 앞당기므로, 방·마감 검사와 추천 저장 동안에도 잠금을 보유합니다.</p>
+        <p>같은 질문을 추천하는 서로 다른 참여자도 처음부터 차례를 기다립니다. 잠금 대기와 커넥션 점유가 길어지고 타임아웃이 생길 가능성은 구조상 예상한 비용이며, 이번 실험에서 측정한 결과는 아닙니다.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+  </div>
+</article>
+
+</section>
+<!-- 13. AWS 배포 구조 -->
     <section class="slide " id="deployment" aria-labelledby="deployment-title">
       <div class="slide-title"><h2 id="deployment-title"><span>13</span> AWS 배포 구조</h2></div>
       <div class="slide-content"><div class="deploy-diagram">
