@@ -780,6 +780,14 @@ p code { font-size: .88em; }
   #vote-lock-cost .verification-method { padding: 12px 14px; }
 }
 
+
+/* Explain the identical operation and independent transaction of each task. */
+#vote-lock-cost .task-context { margin: 0 0 18px; color: #625247; font-size: 16px; line-height: 1.9; }
+#vote-lock-cost .task-context code { font-size: 14px; }
+@media (max-width: 760px) {
+  #vote-lock-cost .task-context { font-size: 15px; }
+  #vote-lock-cost .task-context code { font-size: 13px; }
+}
 </style></head><body>
 <main class="deck"><section class="profile-about" id="profile" aria-labelledby="profile-title">
   <div class="personal-header">
@@ -1114,6 +1122,7 @@ qnaRoomMapper.<span class="tok-function">updateQnaPhase</span>(roomNo, <span cla
     <div class="issue-columns result-cost-stack">
       <div>
         <h5 id="vote-lock-cost-title">해결 후 확인한 결과</h5>
+        <p class="task-context"><code>task 1</code>과 <code>task 2</code>는 <strong>같은 참여자가 같은 질문을 추천하는 동일한 작업</strong>입니다. 두 작업은 서로 다른 스레드에서 실행했으며, 각 서비스 호출은 <strong>독립된 트랜잭션</strong>으로 처리했습니다.</p>
         <table class="rank-table">
           <caption>서비스 직접 호출 결과 · HTTP 응답 검증과 구분</caption>
           <thead><tr><th scope="col">관찰 대상</th><th scope="col">결과</th></tr></thead>
